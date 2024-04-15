@@ -7,7 +7,7 @@
 	<Sidebar />
 	<div class="flex flex-col gap-4 w-full">
 		<Breadcrumb trail={[{ name: 'Espace client' }]} />
-		<div class="pl-4 pr-4 flex flex-col gap-4">
+		<div class="pl-4 pr-4 pb-4 flex flex-col gap-4">
 			<slot />
 		</div>
 	</div>
