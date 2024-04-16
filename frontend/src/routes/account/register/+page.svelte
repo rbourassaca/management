@@ -139,6 +139,15 @@
 								bind:value={passwordConfirm}
 							/>
 						</label>
+						<div class="alert variant-ghost-warning">
+							<div>⚠</div>
+							<div class="alert-message">
+								<h3 class="h3">Attention</h3>
+								<ul>
+									<li>Le mot de passe doit comprendre 8 caractere ou plus.</li>
+								</ul>
+							</div>
+						</div>
 					</form>
 				</Step>
 			</Stepper>
