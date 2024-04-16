@@ -77,7 +77,10 @@
 			<div class="alert-message">
 				<h3 class="h3">Attention</h3>
 				<ul>
-					<li>Si vous changez votre adresse courriel, vous allez devoir la vérifier.</li>
+					<li>
+						Si vous changez votre adresse courriel, un courriel sera envoyé à votre nouvelle adresse
+						et vous devrez cliquer sur le lien dans le courriel afin de vérifier sa validité.
+					</li>
 				</ul>
 			</div>
 		</div>

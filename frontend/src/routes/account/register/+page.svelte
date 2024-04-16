@@ -111,6 +111,18 @@
 								bind:value={email}
 							/>
 						</label>
+						<div class="alert variant-ghost-warning">
+							<div>⚠</div>
+							<div class="alert-message">
+								<h3 class="h3">Attention</h3>
+								<ul>
+									<li>
+										Un courriel sera envoyé à votre adresse et vous devrez cliquer sur le lien dans
+										le courriel afin de vérifier sa validité avant d'utiliser le service.
+									</li>
+								</ul>
+							</div>
+						</div>
 						<label class="label">
 							<span>Mot de passe</span>
 							{#if form !== null && form.error.password}
