@@ -1,8 +1,15 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { breadcrumbStore } from '$lib/stores/breadcrumb.js';
 
 	export let data;
 	export let form;
+
+	$breadcrumbStore = [
+		{ name: 'Accueil', href: '/' },
+		{ name: 'Espace client', href: '/dashboard' },
+		{ name: 'Paramètres du profile' }
+	];
 
 	let firstName: string = form?.values?.firstName?.toString() || '';
 	let lastName: string = form?.values?.lastName?.toString() || '';
