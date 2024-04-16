@@ -121,7 +121,7 @@
 			<div class="alert-message">
 				<h3 class="h3">Attention</h3>
 				<ul>
-					<li>Le mot de passe doit comprendre 8 caractere ou plus.</li>
+					<li>Le mot de passe doit comprendre 8 caractères ou plus.</li>
 					<li>
 						Si vous changez votre mot de passe, vous devez remplir votre mot de passe actuel, votre
 						nouveau mot de passe et le confirmer.
