@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { TreeView, TreeViewItem, type TreeViewNode } from '@skeletonlabs/skeleton';
+	import { TreeView, TreeViewItem } from '@skeletonlabs/skeleton';
 </script>
 
 <aside class="h-full card bg-surface-50-900-token flex flex-col gap-1 w-48 drop-shadow">
@@ -15,6 +15,9 @@
 		<TreeViewItem>
 			Paramètres
 			<svelte:fragment slot="children">
+				<a href="/dashboard/settings/organizations">
+					<TreeViewItem>Organisations</TreeViewItem>
+				</a>
 				<a href="/dashboard/settings/profile">
 					<TreeViewItem>Profile</TreeViewItem>
 				</a>
