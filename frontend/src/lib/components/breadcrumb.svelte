@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
-	const separator = '›';
+	const separator = '/';
 </script>
 
 <ol class="breadcrumb card bg-surface-50-900-token p-2 ps-4 drop-shadow">
