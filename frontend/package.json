@@ -41,6 +41,7 @@
   "type": "module",
   "dependencies": {
     "@floating-ui/dom": "1.6.3",
+    "iconify-icon": "^2.1.0",
     "pocketbase": "^0.21.1"
   }
 }
