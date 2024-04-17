@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import Panel from '$lib/components/panel.svelte';
 
 	export let form;
 
@@ -10,7 +11,7 @@
 
 <div class="container h-full mx-auto flex flex-col gap-4 justify-center items-center">
 	<h2 class="h2">Se connecter</h2>
-	<div class="card p-4 w-screen max-w-lg flex flex-col gap-4">
+	<Panel style="w-screen max-w-lg">
 		<form
 			method="post"
 			use:enhance
@@ -55,5 +56,5 @@
 				<span>Se connecter</span>
 			</button>
 		</form>
-	</div>
+	</Panel>
 </div>

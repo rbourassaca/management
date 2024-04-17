@@ -2,6 +2,8 @@
 	import { Stepper, Step } from '@skeletonlabs/skeleton';
 	import { enhance } from '$app/forms';
 
+	import Panel from '$lib/components/panel.svelte';
+
 	export let form;
 
 	let acceptedTerms: boolean = form?.error || false;
@@ -15,7 +17,7 @@
 
 <div class="container h-full mx-auto flex flex-col gap-4 justify-center items-center">
 	<h2 class="h2">Créer un compte</h2>
-	<div class="card p-4 w-screen max-w-lg">
+	<Panel style="w-screen max-w-lg">
 		{#if form?.success}
 			<h3 class="h3">Le compte à été créé!</h3>
 			<p>Avant de vous connecter, vous devez vérifier votre adresse courriel.</p>
@@ -164,5 +166,5 @@
 				</Step>
 			</Stepper>
 		{/if}
-	</div>
+	</Panel>
 </div>

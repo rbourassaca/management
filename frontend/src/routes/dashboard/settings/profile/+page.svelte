@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb.js';
+	import Panel from '$lib/components/panel.svelte';
 
 	export let data;
 	export let form;
@@ -21,7 +22,7 @@
 </script>
 
 <h1 class="h1">Paramètres du profile</h1>
-<div class="card p-4">
+<Panel>
 	<form
 		action="?/updateProfile"
 		method="post"
@@ -155,4 +156,4 @@
 			<span>Enregistrer</span>
 		</button>
 	</form>
-</div>
+</Panel>

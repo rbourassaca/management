@@ -3,6 +3,8 @@
 	import { Table, tableMapperValues } from '@skeletonlabs/skeleton';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 
+	import Panel from '$lib/components/panel.svelte';
+
 	export let data;
 
 	let orgOwner: {}[] = [];
@@ -45,13 +47,13 @@
 
 {#if orgOwnerTable}
 	<h2 class="h2">Que je gère</h2>
-	<div class="card p-4">
+	<Panel>
 		<Table source={orgOwnerTable} />
-	</div>
+	</Panel>
 {/if}
 {#if orgMemberTable}
 	<h2 class="h2">Que je suis un membre</h2>
-	<div class="card p-4">
+	<Panel>
 		<Table source={orgMemberTable} />
-	</div>
+	</Panel>
 {/if}
