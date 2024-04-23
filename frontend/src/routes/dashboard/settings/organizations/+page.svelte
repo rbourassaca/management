@@ -49,6 +49,7 @@
 	<h2 class="h2">Que je gère</h2>
 	<Panel>
 		<Table source={orgOwnerTable} />
+		<a class="anchor" href="/dashboard/settings/organizations/create">Créer une organisation</a>
 	</Panel>
 {/if}
 {#if orgMemberTable}
