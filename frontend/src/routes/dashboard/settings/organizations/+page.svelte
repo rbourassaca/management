@@ -1,5 +1,8 @@
 <script lang="ts">
 	import type { TableSource } from '@skeletonlabs/skeleton';
+
+	import { goto } from '$app/navigation';
+
 	import { Table, tableMapperValues } from '@skeletonlabs/skeleton';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 
@@ -23,16 +26,16 @@
 
 	if (orgOwner && orgOwner.length > 0) {
 		orgOwnerTable = {
-			head: ['Logo', 'Nom'],
-			body: tableMapperValues(orgOwner, ['logo', 'name']),
-			foot: ['Totale', `<code class="code">${orgOwner.length}</code>`]
+			head: ['id', 'Nom'],
+			body: tableMapperValues(orgOwner, ['id', 'name']),
+			foot: [`Totale: <code class="code">${orgOwner.length}</code>`]
 		};
 	}
 	if (orgMember && orgMember.length > 0) {
 		orgMemberTable = {
-			head: ['Logo', 'Nom'],
-			body: tableMapperValues(orgMember, ['logo', 'name']),
-			foot: ['Totale', `<code class="code">${orgMember.length}</code>`]
+			head: ['Nom'],
+			body: tableMapperValues(orgMember, ['name']),
+			foot: [`Totale: <code class="code">${orgMember.length}</code>`]
 		};
 	}
 
@@ -41,6 +44,10 @@
 		{ name: 'Espace client', href: '/dashboard' },
 		{ name: 'Organisations' }
 	];
+
+	const handleSelected = (target: any) => {
+		goto(`./organizations/edit/${target.detail[0]}`);
+	};
 </script>
 
 <h1 class="h1">Organisations</h1>
@@ -48,7 +55,7 @@
 {#if orgOwnerTable}
 	<h2 class="h2">Que je gère</h2>
 	<Panel>
-		<Table source={orgOwnerTable} />
+		<Table source={orgOwnerTable} interactive={true} on:selected={handleSelected} />
 		<a class="anchor" href="/dashboard/settings/organizations/create">Créer une organisation</a>
 	</Panel>
 {/if}
