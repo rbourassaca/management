@@ -6,6 +6,7 @@
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 
 	export let data;
+	export let form;
 
 	const modalStore = getModalStore();
 
@@ -41,13 +42,16 @@
 	<form action="?/edit" method="post" class="flex flex-col gap-4" bind:this={editFormElement}>
 		<label class="label">
 			<span>Nom</span>
+			{#if form !== null && form.error.name}
+				<span class="badge variant-filled-error">{form.error.name.code}</span>
+			{/if}
 			<input class="input" type="text" name="name" placeholder={name} bind:value={name} />
 		</label>
 		<button
 			type="button"
 			class="btn variant-filled-primary"
 			disabled={!(name.length > 0)}
-			on:click={() => {
+			on:click={(e) => {
 				editFormElement.submit();
 			}}
 		>
