@@ -35,7 +35,7 @@
 <h1 class="h1">{data.organization.name}</h1>
 
 <Panel>
-	<form action="?/remove" method="post" bind:this={removeFormElement} use:enhance />
+	<form action="?/remove" method="post" bind:this={removeFormElement} use:enhance class="hidden" />
 	<button
 		type="button"
 		class="btn variant-filled-error"
