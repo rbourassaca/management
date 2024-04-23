@@ -12,7 +12,7 @@
 	const modal: ModalSettings = {
 		type: 'confirm',
 		title: 'Attention',
-		body: `Êtes-vous sur de vouloir supprimer l'organisation <code class="code">${data.organization.name}</code>? Tous les renseignements de l'organisation seront supprimé et il sera impossible d'y accéder après la suppression.`,
+		body: `Êtes-vous sur de vouloir supprimer l'organisation <code class="code">${data.organization.name}</code> ? Tous les renseignements de l'organisation seront supprimé et il sera impossible d'y accéder après la suppression.`,
 		buttonTextConfirm: "Supprimer l'organisation",
 		buttonTextCancel: 'Annuler',
 		response: async (r: boolean) => {
