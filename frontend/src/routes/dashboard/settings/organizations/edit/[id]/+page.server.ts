@@ -13,6 +13,14 @@ export const load = async ({ locals, params }) => {
 };
 
 export const actions = {
+	edit: async ({ locals, params, request }) => {
+		const formData = Object.fromEntries(await request.formData());
+		try {
+			await locals.pocketbase.collection('organizations').update(params.id, { ...formData });
+		} catch (err: any) {
+			return { success: false, error: err.data.data, values: { ...formData } };
+		}
+	},
 	remove: async ({ locals, params }) => {
 		try {
 			await locals.pocketbase.collection('organizations').delete(params.id);

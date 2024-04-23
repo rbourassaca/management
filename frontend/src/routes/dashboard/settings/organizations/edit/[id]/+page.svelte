@@ -29,12 +29,31 @@
 		{ name: data.organization.name }
 	];
 
+	let name: string = '';
+
+	let editFormElement: HTMLFormElement;
 	let removeFormElement: HTMLFormElement;
 </script>
 
 <h1 class="h1">{data.organization.name}</h1>
 
 <Panel>
+	<form action="?/edit" method="post" class="flex flex-col gap-4" bind:this={editFormElement}>
+		<label class="label">
+			<span>Nom</span>
+			<input class="input" type="text" name="name" placeholder={name} bind:value={name} />
+		</label>
+		<button
+			type="button"
+			class="btn variant-filled-primary"
+			disabled={!(name.length > 0)}
+			on:click={() => {
+				editFormElement.submit();
+			}}
+		>
+			<span>Modifier mon organisation</span>
+		</button>
+	</form>
 	<form action="?/remove" method="post" bind:this={removeFormElement} use:enhance class="hidden" />
 	<button
 		type="button"
