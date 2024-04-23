@@ -1,4 +1,5 @@
 <script lang="ts">
+	import 'iconify-icon';
 	import { computePosition, autoUpdate, offset, shift, flip, arrow } from '@floating-ui/dom';
 	import { AppShell, Modal, initializeStores, storePopup } from '@skeletonlabs/skeleton';
 
