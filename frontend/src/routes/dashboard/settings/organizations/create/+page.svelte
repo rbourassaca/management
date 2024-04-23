@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
 	import Panel from '$lib/components/panel.svelte';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 	$breadcrumbStore = [
@@ -15,7 +16,13 @@
 <h1 class="h1">Créer une organisation</h1>
 
 <Panel>
-	<form action="?/create" method="post" class="flex flex-col gap-4" bind:this={formElement}>
+	<form
+		action="?/create"
+		method="post"
+		class="flex flex-col gap-4"
+		use:enhance
+		bind:this={formElement}
+	>
 		<label class="label">
 			<span>Nom</span>
 			<input
