@@ -1,8 +1,26 @@
 <script lang="ts">
+	import type { ModalSettings } from '@skeletonlabs/skeleton';
+	import { enhance } from '$app/forms';
+	import { getModalStore } from '@skeletonlabs/skeleton';
 	import Panel from '$lib/components/panel.svelte';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 
 	export let data;
+
+	const modalStore = getModalStore();
+
+	const modal: ModalSettings = {
+		type: 'confirm',
+		title: 'Attention',
+		body: `Êtes-vous sur de vouloir supprimer l'organisation <code class="code">${data.organization.name}</code>? Tous les renseignements de l'organisation seront supprimé et il sera impossible d'y accéder après la suppression.`,
+		buttonTextConfirm: "Supprimer l'organisation",
+		buttonTextCancel: 'Annuler',
+		response: async (r: boolean) => {
+			if (r) {
+				removeFormElement.submit();
+			}
+		}
+	};
 
 	$breadcrumbStore = [
 		{ name: 'Accueil', href: '/' },
@@ -10,6 +28,21 @@
 		{ name: 'Organisations', href: '/dashboard/settings/organizations' },
 		{ name: data.organization.name }
 	];
+
+	let removeFormElement: HTMLFormElement;
 </script>
 
 <h1 class="h1">{data.organization.name}</h1>
+
+<Panel>
+	<form action="?/remove" method="post" bind:this={removeFormElement} use:enhance />
+	<button
+		type="button"
+		class="btn variant-filled-error"
+		on:click={() => {
+			modalStore.trigger(modal);
+		}}
+	>
+		Supprimer l'organisation
+	</button>
+</Panel>

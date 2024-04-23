@@ -51,17 +51,16 @@
 </script>
 
 <h1 class="h1">Organisations</h1>
-
-{#if orgOwnerTable}
-	<h2 class="h2">Que je gère</h2>
-	<Panel>
+<h2 class="h2">Que je gère</h2>
+<Panel>
+	{#if orgOwnerTable}
 		<Table source={orgOwnerTable} interactive={true} on:selected={handleSelected} />
-		<a class="anchor" href="/dashboard/settings/organizations/create">Créer une organisation</a>
-	</Panel>
-{/if}
-{#if orgMemberTable}
-	<h2 class="h2">Que je suis un membre</h2>
-	<Panel>
+	{/if}
+	<a class="anchor" href="/dashboard/settings/organizations/create">Créer une organisation</a>
+</Panel>
+<h2 class="h2">Que je suis un membre</h2>
+<Panel>
+	{#if orgMemberTable}
 		<Table source={orgMemberTable} />
-	</Panel>
-{/if}
+	{/if}
+</Panel>
