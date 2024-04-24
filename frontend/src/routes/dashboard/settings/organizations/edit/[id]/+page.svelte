@@ -1,7 +1,9 @@
 <script lang="ts">
 	import type { ModalSettings } from '@skeletonlabs/skeleton';
+
 	import { enhance } from '$app/forms';
-	import { getModalStore } from '@skeletonlabs/skeleton';
+	import { getModalStore, Accordion, AccordionItem } from '@skeletonlabs/skeleton';
+
 	import Panel from '$lib/components/panel.svelte';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 
@@ -39,7 +41,79 @@
 </script>
 
 <h1 class="h1">{data.organization.name}</h1>
+<h2 class="h2">Membres</h2>
+<Panel>
+	<Accordion>
+		<AccordionItem>
+			<svelte:fragment slot="lead">
+				<iconify-icon icon="clarity:administrator-line" />
+			</svelte:fragment>
+			<svelte:fragment slot="summary">Administrateurs</svelte:fragment>
+			<svelte:fragment slot="content">
+				<div class="table-container">
+					<table class="table table-compact">
+						<thead>
+							<tr>
+								<th>Prénom</th>
+								<th>Nom de Famille</th>
+								<th>Courriel</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{#if owners}
+								{#each owners as owner}
+									<tr>
+										<td>{owner.firstName}</td>
+										<td>{owner.lastName}</td>
+										<td>{owner.email}</td>
+										<td>
+											<button
+												class="chip variant-soft hover:variant-filled"
+												disabled={!(owners.length > 1)}
+											>
+												<span><iconify-icon icon="clarity:trash-line" /></span>
+												<span>Supprimer</span>
+											</button>
+										</td>
+									</tr>
+								{/each}
+							{/if}
+							<tr>
+								<td>
+									<input class="input" type="text" name="" id="" />
+								</td>
+								<td>
+									<input class="input" type="text" name="" id="" />
+								</td>
+								<td>
+									<input class="input" type="email" name="" id="" />
+								</td>
+								<td>
+									<button class="chip variant-soft hover:variant-filled">
+										<span><iconify-icon icon="clarity:plus-line" /></span>
+										<span>Ajouter</span>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</svelte:fragment>
+		</AccordionItem>
+		<AccordionItem>
+			<svelte:fragment slot="lead">
+				<iconify-icon icon="clarity:user-line" />
+			</svelte:fragment>
+			<svelte:fragment slot="summary">Membres</svelte:fragment>
+			<svelte:fragment slot="content">
+				<!-- TODO: Table -->
+			</svelte:fragment>
+		</AccordionItem>
+	</Accordion>
+</Panel>
 
+<h2 class="h2">Informations</h2>
 <Panel>
 	<form action="?/edit" method="post" class="flex flex-col gap-4" bind:this={editFormElement}>
 		<label class="label">
@@ -63,17 +137,37 @@
 				editFormElement.submit();
 			}}
 		>
-			<span>Modifier mon organisation</span>
+			<span>Modifier les informations</span>
 		</button>
 	</form>
-	<form action="?/remove" method="post" bind:this={removeFormElement} use:enhance class="hidden" />
-	<button
-		type="button"
-		class="btn variant-filled-error"
-		on:click={() => {
-			modalStore.trigger(modal);
-		}}
-	>
-		Supprimer l'organisation
-	</button>
+</Panel>
+
+<h2 class="h2">Supprimer l'organisation</h2>
+<Panel>
+	<Accordion>
+		<AccordionItem>
+			<svelte:fragment slot="lead">
+				<iconify-icon icon="clarity:trash-line" />
+			</svelte:fragment>
+			<svelte:fragment slot="summary">Supprimer l'organisation</svelte:fragment>
+			<svelte:fragment slot="content">
+				<form
+					action="?/remove"
+					method="post"
+					bind:this={removeFormElement}
+					use:enhance
+					class="hidden"
+				/>
+				<button
+					type="button"
+					class="btn variant-filled-error w-full"
+					on:click={() => {
+						modalStore.trigger(modal);
+					}}
+				>
+					Supprimer l'organisation
+				</button>
+			</svelte:fragment>
+		</AccordionItem>
+	</Accordion>
 </Panel>
