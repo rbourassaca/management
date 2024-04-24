@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ModalSettings } from '@skeletonlabs/skeleton';
 	import { enhance } from '$app/forms';
-	import { getModalStore, InputChip } from '@skeletonlabs/skeleton';
+	import { getModalStore } from '@skeletonlabs/skeleton';
 	import Panel from '$lib/components/panel.svelte';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 
