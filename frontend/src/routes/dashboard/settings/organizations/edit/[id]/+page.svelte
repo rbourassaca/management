@@ -3,6 +3,7 @@
 
 	import Panel from '$lib/components/panel.svelte';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
+	import Table from '$lib/components/table.svelte';
 
 	export let data;
 	export let form;
@@ -15,8 +16,6 @@
 	];
 
 	let name: string = '';
-	let owners = data.organization.expand?.owners;
-	let members = data.organization.expand?.members;
 
 	let editFormElement: HTMLFormElement;
 </script>
@@ -31,55 +30,24 @@
 			</svelte:fragment>
 			<svelte:fragment slot="summary">Administrateurs</svelte:fragment>
 			<svelte:fragment slot="content">
-				<div class="table-container">
-					<table class="table table-compact">
-						<thead>
-							<tr>
-								<th>Prénom</th>
-								<th>Nom de Famille</th>
-								<th>Courriel</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							{#if owners}
-								{#each owners as owner}
-									<tr>
-										<td>{owner.firstName}</td>
-										<td>{owner.lastName}</td>
-										<td>{owner.email}</td>
-										<td>
-											<button
-												class="chip variant-soft hover:variant-filled"
-												disabled={!(owners.length > 1)}
-											>
-												<span><iconify-icon icon="clarity:trash-line" /></span>
-												<span>Supprimer</span>
-											</button>
-										</td>
-									</tr>
-								{/each}
-							{/if}
-							<tr>
-								<td>
-									<input class="input" type="text" name="" id="" />
-								</td>
-								<td>
-									<input class="input" type="text" name="" id="" />
-								</td>
-								<td>
-									<input class="input" type="email" name="" id="" />
-								</td>
-								<td>
-									<button class="chip variant-soft hover:variant-filled">
-										<span><iconify-icon icon="clarity:plus-line" /></span>
-										<span>Ajouter</span>
-									</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+				<Table
+					data={data.organization.expand?.owners}
+					fields={[
+						{ key: 'firstName', label: 'Prénom' },
+						{ key: 'lastName', label: 'Nom de famille' },
+						{ key: 'email', label: 'Courriel' }
+					]}
+					actions={[
+						{
+							icon: 'clarity:trash-line',
+							name: 'Supprimer',
+							action: () => {
+								console.log('click');
+								//TODO: Handle action
+							}
+						}
+					]}
+				/>
 			</svelte:fragment>
 		</AccordionItem>
 		<AccordionItem>
@@ -88,7 +56,14 @@
 			</svelte:fragment>
 			<svelte:fragment slot="summary">Membres</svelte:fragment>
 			<svelte:fragment slot="content">
-				<!-- TODO: Table -->
+				<Table
+					data={data.organization.expand?.members}
+					fields={[
+						{ key: 'firstName', label: 'Prénom' },
+						{ key: 'lastName', label: 'Nom de famille' },
+						{ key: 'email', label: 'Courriel' }
+					]}
+				/>
 			</svelte:fragment>
 		</AccordionItem>
 	</Accordion>
