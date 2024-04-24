@@ -1,29 +1,11 @@
 <script lang="ts">
-	import type { ModalSettings } from '@skeletonlabs/skeleton';
-
-	import { enhance } from '$app/forms';
-	import { getModalStore, Accordion, AccordionItem } from '@skeletonlabs/skeleton';
+	import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
 
 	import Panel from '$lib/components/panel.svelte';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 
 	export let data;
 	export let form;
-
-	const modalStore = getModalStore();
-
-	const modal: ModalSettings = {
-		type: 'confirm',
-		title: 'Attention',
-		body: `Êtes-vous sur de vouloir supprimer l'organisation <code class="code">${data.organization.name}</code> ? Tous les renseignements de l'organisation seront supprimé et il sera impossible d'y accéder après la suppression.`,
-		buttonTextConfirm: "Supprimer l'organisation",
-		buttonTextCancel: 'Annuler',
-		response: async (r: boolean) => {
-			if (r) {
-				removeFormElement.submit();
-			}
-		}
-	};
 
 	$breadcrumbStore = [
 		{ name: 'Accueil', href: '/' },
@@ -37,7 +19,6 @@
 	let members = data.organization.expand?.members;
 
 	let editFormElement: HTMLFormElement;
-	let removeFormElement: HTMLFormElement;
 </script>
 
 <h1 class="h1">{data.organization.name}</h1>
@@ -151,22 +132,7 @@
 			</svelte:fragment>
 			<svelte:fragment slot="summary">Supprimer l'organisation</svelte:fragment>
 			<svelte:fragment slot="content">
-				<form
-					action="?/remove"
-					method="post"
-					bind:this={removeFormElement}
-					use:enhance
-					class="hidden"
-				/>
-				<button
-					type="button"
-					class="btn variant-filled-error w-full"
-					on:click={() => {
-						modalStore.trigger(modal);
-					}}
-				>
-					Supprimer l'organisation
-				</button>
+				<a href={`./${data.organization.id}/delete`} class="anchor">Supprimer l'organisation</a>
 			</svelte:fragment>
 		</AccordionItem>
 	</Accordion>

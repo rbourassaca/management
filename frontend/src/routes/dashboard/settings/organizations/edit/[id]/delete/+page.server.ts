@@ -1,4 +1,4 @@
-import { error } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals, params }) => {
 	let org;
@@ -15,12 +15,12 @@ export const load = async ({ locals, params }) => {
 };
 
 export const actions = {
-	edit: async ({ locals, params, request }) => {
-		const formData = Object.fromEntries(await request.formData());
+	delete: async ({ locals, params }) => {
 		try {
-			await locals.pocketbase.collection('organizations').update(params.id, { ...formData });
+			await locals.pocketbase.collection('organizations').delete(params.id);
 		} catch (err: any) {
-			return { success: false, error: err.data.data, values: { ...formData } };
+			return { success: false, error: err.data.data };
 		}
+		throw redirect(303, '../../');
 	}
 };
