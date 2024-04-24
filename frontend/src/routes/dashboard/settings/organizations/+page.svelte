@@ -1,7 +1,9 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 
 	import Panel from '$lib/components/panel.svelte';
+	import Table from '$lib/components/table.svelte';
 
 	export let data;
 
@@ -10,55 +12,38 @@
 		{ name: 'Espace client', href: '/dashboard' },
 		{ name: 'Organisations' }
 	];
+
+	let orgOwner: any[] = [];
+	let orgMember: any[] = [];
+
+	data.organizations?.forEach((org) => {
+		if (org.owners.includes(data.user.id)) {
+			orgOwner.push(org);
+		} else {
+			orgMember.push(org);
+		}
+	});
 </script>
 
 <h1 class="h1">Organisations</h1>
 <h2 class="h2">Que je gère</h2>
 <Panel>
-	<div class="table-container">
-		<table class="table table-compact table-interactive">
-			<thead>
-				<tr>
-					<th>Nom</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#if data.organizations}
-					{#each data.organizations as org}
-						{#if org.owners.includes(data.user.id)}
-							<tr>
-								<a href={`./organizations/edit/${org.id}`} class="block">
-									<td>{org.name}</td>
-								</a>
-							</tr>
-						{/if}
-					{/each}
-				{/if}
-			</tbody>
-		</table>
-	</div>
+	<Table
+		data={orgOwner}
+		fields={[{ key: 'name', label: 'Nom' }]}
+		actions={[
+			{
+				icon: 'clarity:edit-line',
+				name: 'Modifier',
+				action: (e, item) => {
+					goto(`./organizations/edit/${item.id}`);
+				}
+			}
+		]}
+	/>
 	<a class="anchor" href="/dashboard/settings/organizations/create">Créer une organisation</a>
 </Panel>
 <h2 class="h2">Que je suis un membre</h2>
 <Panel>
-	<div class="table-container">
-		<table class="table table-compact">
-			<thead>
-				<tr>
-					<th>Nom</th>
-				</tr>
-			</thead>
-			<tbody>
-				{#if data.organizations}
-					{#each data.organizations as org}
-						{#if org.members.includes(data.user.id)}
-							<tr>
-								<td>{org.name}</td>
-							</tr>
-						{/if}
-					{/each}
-				{/if}
-			</tbody>
-		</table>
-	</div>
+	<Table data={orgMember} fields={[{ key: 'name', label: 'Nom' }]} />
 </Panel>

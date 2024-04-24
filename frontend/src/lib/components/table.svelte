@@ -2,8 +2,9 @@
 	export let data: any[];
 	export let fields: { key: string; label: string }[];
 	export let actions:
-		| [{ icon: string | undefined; name: string; action: (e: Event) => void }]
+		| [{ icon: string | undefined; name: string; action: (e: Event, item: any) => void }]
 		| undefined = undefined;
+	export let actionLabel: string = 'Actions';
 </script>
 
 <div class="table-container">
@@ -14,7 +15,7 @@
 					<th>{field.label}</th>
 				{/each}
 				{#if actions}
-					<th>Actions</th>
+					<th class="text-right">{actionLabel}</th>
 				{/if}
 			</tr>
 		</thead>
@@ -26,11 +27,11 @@
 							<td>{item[field.key]}</td>
 						{/each}
 						{#if actions}
-							<td>
+							<td class="text-right">
 								{#each actions as action}
 									<button
 										class="chip variant-soft hover:variant-filled"
-										on:click={(e) => action.action(e)}
+										on:click={(e) => action.action(e, item)}
 									>
 										{#if action.icon}
 											<span><iconify-icon icon={action.icon} /></span>
