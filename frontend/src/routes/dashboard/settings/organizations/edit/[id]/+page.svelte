@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { ModalSettings } from '@skeletonlabs/skeleton';
 	import { enhance } from '$app/forms';
-	import { getModalStore } from '@skeletonlabs/skeleton';
+	import { getModalStore, InputChip } from '@skeletonlabs/skeleton';
 	import Panel from '$lib/components/panel.svelte';
 	import { breadcrumbStore } from '$lib/stores/breadcrumb';
 
@@ -31,6 +31,8 @@
 	];
 
 	let name: string = '';
+	let owners = data.organization.expand?.owners;
+	let members = data.organization.expand?.members;
 
 	let editFormElement: HTMLFormElement;
 	let removeFormElement: HTMLFormElement;
@@ -45,7 +47,13 @@
 			{#if form !== null && form.error.name}
 				<span class="badge variant-filled-error">{form.error.name.code}</span>
 			{/if}
-			<input class="input" type="text" name="name" placeholder={name} bind:value={name} />
+			<input
+				class="input"
+				type="text"
+				name="name"
+				placeholder={data.organization.name}
+				bind:value={name}
+			/>
 		</label>
 		<button
 			type="button"

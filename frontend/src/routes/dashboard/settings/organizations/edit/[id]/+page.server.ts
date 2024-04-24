@@ -3,7 +3,9 @@ import { error, redirect } from '@sveltejs/kit';
 export const load = async ({ locals, params }) => {
 	let org;
 	try {
-		org = await locals.pocketbase.collection('organizations').getOne(params.id);
+		org = await locals.pocketbase
+			.collection('organizations')
+			.getOne(params.id, { expand: 'members, owners' });
 	} catch (err: any) {
 		throw error(404, err.response.message);
 	}
