@@ -161,6 +161,16 @@
 						{ key: 'lastName', label: 'Nom de famille' },
 						{ key: 'email', label: 'Courriel' }
 					]}
+					actions={[
+						{
+							icon: 'clarity:trash-line',
+							name: 'Supprimer',
+							action: () => {
+								console.log('click');
+								//TODO: Handle action
+							}
+						}
+					]}
 				/>
 				<Accordion>
 					<AccordionItem>
@@ -173,7 +183,6 @@
 								<label for="emails">
 									Entrer les courriels des membres à ajouter, séparé par une virgule.
 								</label>
-								<input type="hidden" name="owners" value={false} />
 								<div class="flex gap-1">
 									<input
 										class="input"

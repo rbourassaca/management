@@ -27,9 +27,11 @@ export const actions = {
 		const formData = Object.fromEntries(await request.formData());
 		try {
 			if (formData.owners) {
-				// Add owners
+				// TODO: Add owners
+			} else if (formData.administrators) {
+				// TODO: Add admin
 			} else {
-				// Add members
+				// TODO: Add members
 			}
 		} catch (err: any) {
 			return { success: false, error: err.data.data, values: { ...formData } };
